@@ -2,27 +2,26 @@ package factory
 
 import (
 	cachePkg "github.com/lokesh-go/design-patterns-golang/factory/pkg/cache"
+	jsonPkg "github.com/lokesh-go/design-patterns-golang/factory/pkg/file/json"
+	txtPkg "github.com/lokesh-go/design-patterns-golang/factory/pkg/file/txt"
 	mongodbPkg "github.com/lokesh-go/design-patterns-golang/factory/pkg/mongodb"
 )
 
-// methods ...
-type methods interface {
-	GetClient() string
+type factory struct{}
+
+// Factories ...
+type Factories interface {
+	Database(string) dbMethods
+	FileSystem(string) fileMethods
 }
 
-type db struct{}
-
-func new() methods {
-	return &db{}
-}
-
-// GetClient: default response
-func (d *db) GetClient() (res string) {
-	return "Invalid Input"
+// New ...
+func New() Factories {
+	return &factory{}
 }
 
 // Database ...
-func Database(database string) methods {
+func (f *factory) Database(database string) dbMethods {
 	switch database {
 	case "mongodb":
 		{
@@ -34,7 +33,25 @@ func Database(database string) methods {
 		}
 	default:
 		{
-			return new()
+			return newdb()
+		}
+	}
+}
+
+// FileSystem ...
+func (f *factory) FileSystem(extension string) fileMethods {
+	switch extension {
+	case "json":
+		{
+			return jsonPkg.New()
+		}
+	case "txt":
+		{
+			return txtPkg.New()
+		}
+	default:
+		{
+			return newfile()
 		}
 	}
 }

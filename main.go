@@ -2,15 +2,18 @@ package main
 
 import (
 	"fmt"
+	"reflect"
 	"sync"
 
+	abstractfactory "github.com/lokesh-go/design-patterns-golang/abstractfactory"
 	factory "github.com/lokesh-go/design-patterns-golang/factory"
 	singleton "github.com/lokesh-go/design-patterns-golang/singleton"
 )
 
 func main() {
-	factoryExample()
-	singletonExample()
+	//factoryExample()
+	//singletonExample()
+	abstractFactoryExample()
 }
 
 func factoryExample() {
@@ -19,7 +22,7 @@ func factoryExample() {
 	fmt.Scan(&input)
 
 	// Calls factory design patterns
-	db := factory.Database(input)
+	db := factory.New().Database(input)
 	fmt.Println(db.GetClient())
 }
 
@@ -33,4 +36,9 @@ func singletonExample() {
 		}()
 	}
 	wg.Wait()
+}
+
+func abstractFactoryExample() {
+	dbFactory := abstractfactory.AbstractFactory("filesystem")
+	fmt.Println("ABS: ", reflect.TypeOf(dbFactory))
 }
