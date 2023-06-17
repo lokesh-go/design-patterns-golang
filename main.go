@@ -6,6 +6,7 @@ import (
 	"sync"
 
 	abstractfactory "github.com/lokesh-go/design-patterns-golang/abstractfactory"
+	adapter "github.com/lokesh-go/design-patterns-golang/adapter.go"
 	builder "github.com/lokesh-go/design-patterns-golang/builder"
 	factory "github.com/lokesh-go/design-patterns-golang/factory"
 	singleton "github.com/lokesh-go/design-patterns-golang/singleton"
@@ -15,7 +16,8 @@ func main() {
 	//factoryExample()
 	//singletonExample()
 	//abstractFactoryExample()
-	builderExample()
+	//builderExample()
+	adapter.AdapterExample()
 }
 
 func factoryExample() {
