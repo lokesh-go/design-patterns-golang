@@ -6,6 +6,7 @@ import (
 	"sync"
 
 	abstractfactory "github.com/lokesh-go/design-patterns-golang/abstractfactory"
+	builder "github.com/lokesh-go/design-patterns-golang/builder"
 	factory "github.com/lokesh-go/design-patterns-golang/factory"
 	singleton "github.com/lokesh-go/design-patterns-golang/singleton"
 )
@@ -13,7 +14,8 @@ import (
 func main() {
 	//factoryExample()
 	//singletonExample()
-	abstractFactoryExample()
+	//abstractFactoryExample()
+	builderExample()
 }
 
 func factoryExample() {
@@ -41,4 +43,13 @@ func singletonExample() {
 func abstractFactoryExample() {
 	dbFactory := abstractfactory.AbstractFactory("filesystem")
 	fmt.Println("ABS: ", reflect.TypeOf(dbFactory))
+}
+
+func builderExample() {
+	mcaStudentBuilder := builder.NewStudentBuilder("mca")
+	mcaStudentBuilder.SetCollege()
+	mcaStudentBuilder.SetName()
+	mcaStudentBuilder.SetRollNo()
+	mcaStudentBuilder.SetStream()
+	fmt.Println(mcaStudentBuilder)
 }
