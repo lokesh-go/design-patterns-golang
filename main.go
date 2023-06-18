@@ -2,12 +2,14 @@ package main
 
 import (
 	"fmt"
+	"log"
 	"reflect"
 	"sync"
 
 	abstractfactory "github.com/lokesh-go/design-patterns-golang/abstractfactory"
 	adapter "github.com/lokesh-go/design-patterns-golang/adapter.go"
 	builder "github.com/lokesh-go/design-patterns-golang/builder"
+	facad "github.com/lokesh-go/design-patterns-golang/facad"
 	factory "github.com/lokesh-go/design-patterns-golang/factory"
 	singleton "github.com/lokesh-go/design-patterns-golang/singleton"
 )
@@ -17,7 +19,8 @@ func main() {
 	//singletonExample()
 	//abstractFactoryExample()
 	//builderExample()
-	adapter.AdapterExample()
+	//adapterExample()
+	facadeExample()
 }
 
 func factoryExample() {
@@ -54,4 +57,17 @@ func builderExample() {
 	mcaStudentBuilder.SetRollNo()
 	mcaStudentBuilder.SetStream()
 	fmt.Println(mcaStudentBuilder)
+}
+
+func adapterExample() {
+	adapter.AdapterExample()
+}
+
+func facadeExample() {
+	newAcc := facad.NewPersonAccount("abc", 123)
+	err := newAcc.CreditAmount("abc", 123, 1000)
+	if err != nil {
+		log.Fatal(err)
+	}
+	newAcc.Status()
 }
