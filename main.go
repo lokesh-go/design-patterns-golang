@@ -9,6 +9,7 @@ import (
 	abstractfactory "github.com/lokesh-go/design-patterns-golang/abstractfactory"
 	adapter "github.com/lokesh-go/design-patterns-golang/adapter.go"
 	builder "github.com/lokesh-go/design-patterns-golang/builder"
+	decorator "github.com/lokesh-go/design-patterns-golang/decorator"
 	facad "github.com/lokesh-go/design-patterns-golang/facad"
 	factory "github.com/lokesh-go/design-patterns-golang/factory"
 	singleton "github.com/lokesh-go/design-patterns-golang/singleton"
@@ -20,7 +21,8 @@ func main() {
 	//abstractFactoryExample()
 	//builderExample()
 	//adapterExample()
-	facadeExample()
+	//facadeExample()
+	decoratorExample()
 }
 
 func factoryExample() {
@@ -70,4 +72,13 @@ func facadeExample() {
 		log.Fatal(err)
 	}
 	newAcc.Status()
+}
+
+func decoratorExample() {
+	// Gets base window laptop
+	basicWindowsLaptop := &decorator.WindowsLaptop{}
+	fmt.Println("Base Price: ", basicWindowsLaptop.GetPrice())
+
+	laptopWithGraphicCard := &decorator.LaptopWithGraphicCard{basicWindowsLaptop}
+	fmt.Println("Laptop with Graphic Card: ", laptopWithGraphicCard.GetPrice())
 }
