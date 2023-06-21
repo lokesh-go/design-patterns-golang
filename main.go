@@ -12,6 +12,7 @@ import (
 	decorator "github.com/lokesh-go/design-patterns-golang/decorator"
 	facad "github.com/lokesh-go/design-patterns-golang/facad"
 	factory "github.com/lokesh-go/design-patterns-golang/factory"
+	observer "github.com/lokesh-go/design-patterns-golang/observer"
 	singleton "github.com/lokesh-go/design-patterns-golang/singleton"
 )
 
@@ -22,7 +23,8 @@ func main() {
 	//builderExample()
 	//adapterExample()
 	//facadeExample()
-	decoratorExample()
+	//decoratorExample()
+	observerExample()
 }
 
 func factoryExample() {
@@ -81,4 +83,20 @@ func decoratorExample() {
 
 	laptopWithGraphicCard := &decorator.LaptopWithGraphicCard{basicWindowsLaptop}
 	fmt.Println("Laptop with Graphic Card: ", laptopWithGraphicCard.GetPrice())
+}
+
+func observerExample() {
+	// Which item to be observe
+	itemToBeObserve := observer.New("Amazon Kindle")
+
+	// Which user wants to notify
+	userAToBeNotify := observer.UserObserver{UserId: "abc@gmail.com"}
+	userBToBeNotify := observer.UserObserver{UserId: "def@gmail.com"}
+
+	// Register user to the particular item
+	itemToBeObserve.RegisterUserObserver(userAToBeNotify)
+	itemToBeObserve.RegisterUserObserver(userBToBeNotify)
+
+	// Update availability
+	itemToBeObserve.UpdateAvailability()
 }
