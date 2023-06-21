@@ -14,6 +14,7 @@ import (
 	factory "github.com/lokesh-go/design-patterns-golang/factory"
 	observer "github.com/lokesh-go/design-patterns-golang/observer"
 	singleton "github.com/lokesh-go/design-patterns-golang/singleton"
+	strategy "github.com/lokesh-go/design-patterns-golang/strategy"
 )
 
 func main() {
@@ -24,7 +25,8 @@ func main() {
 	//adapterExample()
 	//facadeExample()
 	//decoratorExample()
-	observerExample()
+	//observerExample()
+	strategyExample()
 }
 
 func factoryExample() {
@@ -99,4 +101,31 @@ func observerExample() {
 
 	// Update availability
 	itemToBeObserve.UpdateAvailability()
+}
+
+func strategyExample() {
+	// Init cache
+	fifoAlgo := &strategy.Fifo{}
+	c := strategy.New(fifoAlgo)
+
+	// Adds
+	c.Add("name", "ram")
+	c.Add("roll", "1")
+	c.Add("add", "kora")
+
+	// Prints
+	c.Print()
+
+	// Adds
+	c.Add("lan", "go")
+
+	// Prints
+	c.Print()
+
+	// Changed eviction policy
+	lruAlgo := &strategy.LRU{}
+	c.SetEvictionAlgo(lruAlgo)
+
+	c.Add("pc", "mac")
+	c.Print()
 }
